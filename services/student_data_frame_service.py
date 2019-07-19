@@ -1,6 +1,6 @@
 import pandas as pd
 # local imports
-from models.data_frame_model import DataFrameModel
+from globals.data_frame_model import DataFrameModel
 # service to import the student data from service
 # keep the dataframe consistent
 

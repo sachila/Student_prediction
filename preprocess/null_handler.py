@@ -2,8 +2,8 @@
 import pandas as pd
 
 # import local files
-from models.column_list import ColumnList
-from models.data_frame_model import DataFrameModel
+from globals.column_list import ColumnList
+from globals.data_frame_model import DataFrameModel
 
 
 class NullHandler:

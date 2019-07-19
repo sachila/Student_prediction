@@ -1,9 +1,9 @@
 
 # local imports
 from preprocess.null_handler import NullHandler
-from preprocess.bin_handler import DataBinning
-from models.data_frame_model import DataFrameModel
-from models.column_list import ColumnList
+from preprocess.binning_handler import DataBinning
+from globals.data_frame_model import DataFrameModel
+from globals.column_list import ColumnList
 
 
 class PreProcess:

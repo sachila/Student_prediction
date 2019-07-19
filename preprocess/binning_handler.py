@@ -2,7 +2,7 @@
 import pandas as pd
 
 # import local files
-from models.data_frame_model import DataFrameModel
+from globals.data_frame_model import DataFrameModel
 
 
 class DataBinning:
