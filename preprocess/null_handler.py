@@ -1,50 +1,51 @@
 # main libraries
 import pandas as pd
-import numpy as np
-import math
 
 # import local files
-from prediction_globals import PredictionGlobals as pg
+from models.column_list import ColumnList
+from models.data_frame_model import DataFrameModel
 
 
-def handleNull():
-    # check for null values
-    print("null values")
-    print(pg.df.isnull().sum())
-    # remove the null value rows from dataframe
-    rowsToRemove = []
+class NullHandler:
 
-    # iterating the rows
-    for index, row in pg.df.iterrows():
-        # iterating the columns
-        for col in pg.df.columns:
-            # push all the nan values in term1 and absance columns to rowsToRemove array
-            cellValue = pg.df.loc[pg.df.index[index], col]
-            if pd.isnull(cellValue):
-                rowsToRemove.append(index)
+    def __init__(self):
+        self.df = DataFrameModel.data_frame
 
-    # remove the duplicate indexes
-    rowsToRemove = list(dict.fromkeys(rowsToRemove))
-    # remove from dataframe
-    pg.df.drop(rowsToRemove, inplace=True)
-    print("new row count = " + str(pg.df.shape))
+    def handle_null(self):
+        # check for null values
+        print("null values")
+        print(self.df.isnull().sum())
+        # remove the null value rows from dataframe
+        rows_to_remove = []
 
-    # change the text columns to numeric
-    print(pg.df.iterrows())
+        # iterating the rows
+        for index, row in self.df.iterrows():
+            # iterating the columns
+            for col in self.df.columns:
+                # push all the nan values in term1 and absance columns to rows_to_remove array
+                cell_value = self.df.loc[self.df.index[index], col]
+                if pd.isnull(cell_value):
+                    rows_to_remove.append(index)
 
-    twoWayTextToNumber("extraActivities", "yes")
-    twoWayTextToNumber("internet", "yes")
-    twoWayTextToNumber("sex", "M")
+        # remove the duplicate indexes
+        rows_to_remove = list(dict.fromkeys(rows_to_remove))
+        # remove from dataframe
+        self.df.drop(rows_to_remove, inplace=True)
+        print("new row count = " + str(self.df.shape))
 
-    print(pg.df.head())
+        # change the text columns to numeric
+        print(self.df.iterrows())
 
+        self.two_way_text_to_number(ColumnList.extraActivitiesColumnName, "yes")
+        self.two_way_text_to_number(ColumnList.internetColumnName, "yes")
+        self.two_way_text_to_number(ColumnList.sexColumnName, "M")
 
-# convert the Binary text options to numeric values
-# eg. yes -> 1 , no-> 0
-def twoWayTextToNumber(currentColName, mainOption):
-    # iterating the rows
-    for index, row in pg.df.iterrows():
-        if pg.df.at[index, currentColName] == mainOption:
-            pg.df.at[index, currentColName] = 1
-        else:
-            pg.df.at[index, currentColName] = 0
+    # convert the Binary text options to numeric values
+    # eg. yes -> 1 , no-> 0
+    def two_way_text_to_number(self, current_col_name, main_option):
+        # iterating the rows
+        for index, row in self.df.iterrows():
+            if self.df.at[index, current_col_name] == main_option:
+                self.df.at[index, current_col_name] = 1
+            else:
+                self.df.at[index, current_col_name] = 0

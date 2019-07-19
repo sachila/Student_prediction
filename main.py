@@ -1,15 +1,16 @@
 # main libraries
 import pandas as pd
-from prediction_globals import PredictionGlobals as pg
-from preprocess.null_handler import handleNull
+# local imports
+from services.student_data_frame_service import StudentDataFrameService
+from preprocess.preprocess_main import PreProcess
 
-# Read the data in the CSV file using pandas
-
-pg.df = pd.read_csv('data/students.csv')
-print(pg.df.shape)
+# import student data
+data_frame_obj = StudentDataFrameService()
+data_frame_obj.import_student_data()
 
 # start data pre process
-handleNull()
-
+pre_process_obj = PreProcess()
+pre_process_obj.start_pre_process()
 # don't close console
 input("Press enter to exit ;)")
+
