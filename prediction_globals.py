@@ -1,0 +1,2 @@
+class PredictionGlobals:
+    df = None
