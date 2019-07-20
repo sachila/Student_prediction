@@ -11,5 +11,4 @@ class StudentDataFrameService:
         # Read the data in the CSV file using pandas
         # and set it to data frame model
         DataFrameModel.data_frame = pd.read_csv('data/students.csv')
-        print(DataFrameModel.data_frame)
 

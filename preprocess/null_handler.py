@@ -12,9 +12,6 @@ class NullHandler:
         self.df = DataFrameModel.data_frame
 
     def handle_null(self):
-        # check for null values
-        print("null values")
-        print(self.df.isnull().sum())
         # remove the null value rows from dataframe
         rows_to_remove = []
 
@@ -22,7 +19,7 @@ class NullHandler:
         for index, row in self.df.iterrows():
             # iterating the columns
             for col in self.df.columns:
-                # push all the nan values in term1 and absance columns to rows_to_remove array
+                # push all the nan values in term1 and absence columns to rows_to_remove array
                 cell_value = self.df.loc[self.df.index[index], col]
                 if pd.isnull(cell_value):
                     rows_to_remove.append(index)
@@ -31,10 +28,6 @@ class NullHandler:
         rows_to_remove = list(dict.fromkeys(rows_to_remove))
         # remove from dataframe
         self.df.drop(rows_to_remove, inplace=True)
-        print("new row count = " + str(self.df.shape))
-
-        # change the text columns to numeric
-        print(self.df.iterrows())
 
         self.two_way_text_to_number(ColumnList.extraActivitiesColumnName, "yes")
         self.two_way_text_to_number(ColumnList.internetColumnName, "yes")

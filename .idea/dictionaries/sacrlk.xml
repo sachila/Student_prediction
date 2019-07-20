@@ -2,7 +2,14 @@
   <dictionary name="sacrlk">
     <words>
       <w>dataframe</w>
+      <w>dbsc</w>
+      <w>dbscan</w>
       <w>freetime</w>
+      <w>insconsistent</w>
+      <w>interquartile</w>
+      <w>pred</w>
+      <w>quantile</w>
+      <w>scaler</w>
     </words>
   </dictionary>
 </component>
