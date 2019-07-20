@@ -30,9 +30,9 @@ class OutlierHandler:
             cell_term1 = self.df.at[index,  ColumnList.term1ColumnName]
             cell_term2 = self.df.at[index,  ColumnList.term2ColumnName]
             cell_final = self.df.at[index,  ColumnList.finalColumnName]
+            term_mean = (cell_term1 + cell_term2) / 2
 
             '''
-            term_mean = (cell_term1 + cell_term2) / 2
             if term_mean <= 5 and cell_final >= 15: 
                 self.rows_to_remove.append(index)
 
@@ -47,6 +47,10 @@ class OutlierHandler:
                 self.rows_to_remove.append(index)
 
             if cell_term1 <= 3 or cell_term2 <= 3 or cell_final <= 3:
+                self.rows_to_remove.append(index)
+
+            # remove the rows with highest score. these are noisy records
+            if term_mean == 20 or cell_final == 20:
                 self.rows_to_remove.append(index)
 
         # remove the duplicate indexes
