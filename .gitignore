@@ -1,3 +1,4 @@
 # don't track these directories
 __pycache__/
 .idea/
+client/node_modules/
