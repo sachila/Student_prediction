@@ -34,7 +34,7 @@ class PreProcess:
         print("======================= BEFORE DATA PRE PROCESS ==============================  \n")
         # HANDLE OUTLIERS
 
-        # # Box plot
+        # Box plot
         # self.outlier_handler_obj.box_plot()
 
         # # Scatter plot
