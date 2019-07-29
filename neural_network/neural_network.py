@@ -61,10 +61,10 @@ class NeuralNetwork:
         optimizer = tf.train.RMSPropOptimizer(learning_rate=0.006)
         print(self.model.summary())
 
-        self.model.compile(loss='mse',  optimizer=optimizer,metrics=[metrics.mae])
+        self.model.compile(loss='mse',  optimizer=optimizer, metrics=[metrics.mae])
 
     def fit_model(self):
-        filepath = "CNN_best_weights.{epoch:02d}-{val_loss:.2f}.h5"
+        filepath = "best_weights/best_weights.{epoch:02d}-{val_loss:.2f}.h5"
         checkpoint = ModelCheckpoint(filepath, monitor='val_loss', verbose=1, save_best_only=True,
                                      save_weights_only=True, mode='max')
 
