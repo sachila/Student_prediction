@@ -40,7 +40,7 @@ class NeuralNetwork:
         self.EPOCHS = 300
 
         # tensorboard set up
-        self.tensorboard = TensorBoard(log_dir='logs_5'.format(time()))
+        self.tensorboard = TensorBoard(log_dir='logs'.format(time()))
 
         print("====================training data set ================")
         print(self.training_data_features.shape)
@@ -58,10 +58,11 @@ class NeuralNetwork:
         self.model.compile(loss='mse',  optimizer='rmsprop', metrics=['accuracy'])
 
     def fit_model(self):
+        # Save the model after every epoch.
         file_path = "best_weights/best_weights.{epoch:02d}-{acc:.2f}.h5"
         checkpoint = ModelCheckpoint(file_path, monitor='acc', verbose=1, save_best_only=True,
                                      save_weights_only=True, mode='max')
-
+        # Stop training when a monitored quantity has stopped improving.
         early_stop = EarlyStopping(monitor='acc', patience=30, verbose=1, mode='auto')
 
         callback_list = [self.tensorboard, checkpoint, early_stop]
