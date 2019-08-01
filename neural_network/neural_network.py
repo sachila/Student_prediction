@@ -8,8 +8,6 @@ from keras.callbacks import Callback, ModelCheckpoint
 from time import time
 from keras import metrics
 
-
-
 # import local files
 from globals.data_frame_model import DataFrameModel
 
@@ -32,16 +30,16 @@ class NeuralNetwork:
         self.number_example_in_test = int(self.m - self.number_example_in_training)
 
         self.training_data_features = self.df.head(self.number_example_in_training)[self.training_features]
-        # It’s a good practice to shuffle the data before splitting between a train and test set.
-        self.training_data_features =  self.training_data_features\
-            .reindex(np.random.permutation(self.training_data_features.index))
+        # # It’s a good practice to shuffle the data before splitting between a train and test set.
+        # self.training_data_features = self.training_data_features\
+        #      .reindex(np.random.permutation(self.training_data_features.index))
 
         self.training_data_labels = self.df.head(self.number_example_in_training)[self.label_feature]
 
         self.test_data_features = self.df.head(self.number_example_in_test)[self.training_features]
         self.test_data_labels = self.df.head(self.number_example_in_test)[self.label_feature]
 
-        self.EPOCHS = 5
+        self.EPOCHS = 1000
 
         # tensorboard set up
         self.tensorboard = TensorBoard(log_dir='logs'.format(time()))
@@ -70,7 +68,7 @@ class NeuralNetwork:
 
         callback_list = [PrintDot(), self.tensorboard, checkpoint]
         return self.model.fit(self.training_data_features, self.training_data_labels, epochs=self.EPOCHS,
-                              callbacks=callback_list, shuffle=True, validation_split=0.01)
+                              callbacks=callback_list, shuffle=True, validation_split=0.01, batch_size=32)
 
     def evaluate_model(self):
         train_acc, test_acc = self.model.evaluate(self.test_data_features, self.test_data_labels, verbose=0)
