@@ -17,7 +17,7 @@ pre_process_obj.start_pre_process()
 neural_network_obj = NeuralNetwork()
 neural_network_obj.build_model()
 history = neural_network_obj.fit_model()
-neural_network_obj.evaluate_model()
+# neural_network_obj.evaluate_model()
 neural_network_obj.model_save()
 
 # # plot results

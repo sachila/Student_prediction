@@ -2,11 +2,10 @@
 import numpy as np
 import tensorflow as tf
 import keras
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, accuracy_score
 from keras.callbacks import TensorBoard
-from keras.callbacks import Callback, ModelCheckpoint
+from keras.callbacks import Callback, ModelCheckpoint, EarlyStopping
 from time import time
-from keras import metrics
 
 # import local files
 from globals.data_frame_model import DataFrameModel
@@ -28,6 +27,8 @@ class NeuralNetwork:
 
         self.number_example_in_training = int((self.percentage_of_training * self.m) / 100)
         self.number_example_in_test = int(self.m - self.number_example_in_training)
+        print('number_example_in_training',  self.number_example_in_training)
+        print('number_example_in_test',  self.number_example_in_test)
 
         self.training_data_features = self.df.head(self.number_example_in_training)[self.training_features]
 
@@ -36,45 +37,47 @@ class NeuralNetwork:
         self.test_data_features = self.df.head(self.number_example_in_test)[self.training_features]
         self.test_data_labels = self.df.head(self.number_example_in_test)[self.label_feature]
 
-        self.EPOCHS = 1000
+        self.EPOCHS = 300
 
         # tensorboard set up
-        self.tensorboard = TensorBoard(log_dir='logs'.format(time()))
+        self.tensorboard = TensorBoard(log_dir='logs_5'.format(time()))
 
         print("====================training data set ================")
         print(self.training_data_features.shape)
 
     def build_model(self):
         self.model = keras.models.Sequential([
-            keras.layers.Dense(19, activation=tf.nn.relu, kernel_regularizer=keras.regularizers.l2(0.01),
-                               input_shape=(self.training_data_features.shape[1],)),
-            keras.layers.Dense(13, activation=tf.nn.relu, kernel_regularizer=keras.regularizers.l2(0.01)),
-            keras.layers.Dense(7, activation=tf.nn.relu, kernel_regularizer=keras.regularizers.l2(0.01)),
+            keras.layers.Dense(128, activation='relu', input_shape=(self.training_data_features.shape[1],)),
+            keras.layers.Dense(64, activation='relu'),
+            keras.layers.Dense(32, activation='relu'),
             keras.layers.Dense(1)
         ])
 
-        optimizer = tf.train.RMSPropOptimizer(learning_rate=0.006)
         print(self.model.summary())
 
-        self.model.compile(loss='mse',  optimizer=optimizer, metrics=[metrics.mae])
+        self.model.compile(loss='mse',  optimizer='rmsprop', metrics=['accuracy'])
 
     def fit_model(self):
-        filepath = "best_weights/best_weights.{epoch:02d}-{val_loss:.2f}.h5"
-        checkpoint = ModelCheckpoint(filepath, monitor='val_loss', verbose=1, save_best_only=True,
+        file_path = "best_weights/best_weights.{epoch:02d}-{acc:.2f}.h5"
+        checkpoint = ModelCheckpoint(file_path, monitor='acc', verbose=1, save_best_only=True,
                                      save_weights_only=True, mode='max')
 
-        callback_list = [PrintDot(), self.tensorboard, checkpoint]
-        return self.model.fit(self.training_data_features, self.training_data_labels, epochs=self.EPOCHS,
-                              callbacks=callback_list, shuffle=True, validation_split=0.01, batch_size=32)
+        early_stop = EarlyStopping(monitor='acc', patience=30, verbose=1, mode='auto')
 
-    def evaluate_model(self):
-        train_acc, test_acc = self.model.evaluate(self.test_data_features, self.test_data_labels, verbose=0)
-        print('Test accuracy = ' + str(test_acc) + '\n')
+        callback_list = [self.tensorboard, checkpoint, early_stop]
+        history = self.model.fit(self.training_data_features, self.training_data_labels, epochs=self.EPOCHS,
+                                 callbacks=callback_list, validation_split=0.02, shuffle=True)
+
+        loss, metrics = self.model.evaluate(self.test_data_features, self.test_data_labels)
+        print("Mean Square Error = " + str(loss) + "\n")
+        print("Accuracy = " + str(metrics) + "\n")
+        return history
 
     def mean_squared_error(self):
         predicted_value = self.model.predict(self.test_data_features)
         mse = mean_squared_error(np.asmatrix(self.test_data_labels), predicted_value)
-        print("Mean Square Error ", mse)
+
+        print("========= Mean Square Error Range ===============")
         for i in range(0, 10):
             print(predicted_value[i], "--", np.asmatrix(self.test_data_labels)[i])
 
