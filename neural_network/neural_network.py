@@ -30,9 +30,6 @@ class NeuralNetwork:
         self.number_example_in_test = int(self.m - self.number_example_in_training)
 
         self.training_data_features = self.df.head(self.number_example_in_training)[self.training_features]
-        # # It’s a good practice to shuffle the data before splitting between a train and test set.
-        # self.training_data_features = self.training_data_features\
-        #      .reindex(np.random.permutation(self.training_data_features.index))
 
         self.training_data_labels = self.df.head(self.number_example_in_training)[self.label_feature]
 
