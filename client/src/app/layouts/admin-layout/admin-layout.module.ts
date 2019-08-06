@@ -15,6 +15,7 @@ import { TypographyComponent } from "../../pages/typography/typography.component
 // import { RtlComponent } from "../../pages/rtl/rtl.component";
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { StudentListComponent } from "../../pages/student-list/student-list.component";
 
 @NgModule({
   imports: [
@@ -22,16 +23,17 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     HttpClientModule,
-    NgbModule,
+    NgbModule
   ],
   declarations: [
     DashboardComponent,
     UserComponent,
+    StudentListComponent,
     TablesComponent,
     IconsComponent,
     TypographyComponent,
     NotificationsComponent,
-    MapComponent,
+    MapComponent
     // RtlComponent
   ]
 })
