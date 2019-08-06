@@ -14,6 +14,11 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AppRoutingModule } from "./app-routing.module";
 import { ComponentsModule } from "./components/components.module";
 
+
+import { RemoteService } from "./services/remote.service";
+import { StudentListComponent } from './pages/student-list/student-list.component';
+
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -25,8 +30,8 @@ import { ComponentsModule } from "./components/components.module";
     AppRoutingModule,
     ToastrModule.forRoot()
   ],
-  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
-  providers: [],
+  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, StudentListComponent],
+  providers: [RemoteService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
