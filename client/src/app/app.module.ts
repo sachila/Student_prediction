@@ -15,6 +15,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { ComponentsModule } from "./components/components.module";
 
 import { RemoteService } from "./services/remote.service";
+import { StudentDetailsComponent } from './pages/student-details/student-details.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,7 @@ import { RemoteService } from "./services/remote.service";
     AppRoutingModule,
     ToastrModule.forRoot()
   ],
-  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
+  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, StudentDetailsComponent],
   providers: [RemoteService],
   bootstrap: [AppComponent]
 })
