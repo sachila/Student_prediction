@@ -17,8 +17,8 @@ class NeuralNetwork:
         self.df = DataFrameModel.data_frame
         self.model = None
 
-        self.training_features = ['sex', 'age', 'extraActivities',  'internet',  'freetime',  'absences', 'Term1',
-                                  'Term2']
+        self.training_features = ['gender', 'age', 'extraActivities',  'internet', 'workTime', 'freetime',  'absences',
+                                  'Term1', 'Term2']
         self.label_feature = ['Final']
         self.percentage_of_training = 80
 
@@ -37,7 +37,7 @@ class NeuralNetwork:
         self.test_data_features = self.df.head(self.number_example_in_test)[self.training_features]
         self.test_data_labels = self.df.head(self.number_example_in_test)[self.label_feature]
 
-        self.EPOCHS = 300
+        self.EPOCHS = 350
 
         # tensorboard set up
         self.tensorboard = TensorBoard(log_dir='logs'.format(time()))

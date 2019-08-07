@@ -1,45 +1,33 @@
-
 <div class=" content">
   <div class=" row">
     <div class=" col-md-8">
       <div class=" card">
-        <div class=" card-header"><h5 class=" title">New Student</h5></div>
+        <div class=" card-header">
+          <h5 class=" title">New Student</h5>
+        </div>
         <div class=" card-body">
-          <form (ngSubmit)="submit()"> 
+          <form (ngSubmit)="submit()">
             <div class=" row">
               <div class=" col-md-4 pr-md-1">
                 <div class=" form-group">
                   <label> Student Name </label>
-                  <input
-                    class=" form-control" 
-                    name="name"
-                    placeholder="Name"
-                    type="text"
-                    [(ngModel)]="student.name"
-                    required
-                  />
+                  <input class=" form-control" name="name" placeholder="Name" type="text" [(ngModel)]="student.name"
+                    required />
                 </div>
               </div>
               <div class=" col-md-4 px-md-1">
                 <div class=" form-group">
                   <label> Gender </label>
-                  <select name="gender"  [(ngModel)]="student.gender" 
-                    class=" form-control" required> 
-                      <option style="color: black" class=" form-control"  value="M">Male</option>
-                      <option style="color: black" class=" form-control"  value="F">Female</option>
+                  <select name="gender" [(ngModel)]="student.gender" class=" form-control" required>
+                    <option style="color: black" class=" form-control" value="M">Male</option>
+                    <option style="color: black" class=" form-control" value="F">Female</option>
                   </select>
                 </div>
               </div>
               <div class=" col-md-4 pl-md-1">
                 <div class=" form-group">
                   <label> Age </label>
-                  <input
-                    class=" form-control"
-                    placeholder="17"
-                    type="number"
-                    name="age"
-                    [(ngModel)]="student.age"
-                  />
+                  <input class=" form-control" placeholder="17" type="number" name="age" [(ngModel)]="student.age" />
                 </div>
               </div>
             </div>
@@ -47,96 +35,70 @@
               <div class=" col-md-4 pr-md-1">
                 <div class=" form-group">
                   <label> Failures </label>
-                  <input
-                    class=" form-control"
-                    placeholder="0"
-                    type="number"
-                    name="failures"
-                    [(ngModel)]="student.failures" 
-                  />
+                  <input class=" form-control" placeholder="0" type="number" name="failures"
+                    [(ngModel)]="student.failures" />
                 </div>
               </div>
               <div class=" col-md-4 px-md-1">
                 <div class=" form-group">
                   <label> Extracurricular Activities </label>
-                  <select name="extracurricular"  [(ngModel)]="student.extracurricular" 
-                    class=" form-control" required> 
-                      <option style="color: black" class=" form-control"  value="yes">Yes</option>
-                      <option style="color: black" class=" form-control"  value="no">No</option>
+                  <select name="extraActivities" [(ngModel)]="student.extraActivities" class=" form-control" required>
+                    <option style="color: black" class=" form-control" value="yes">Yes</option>
+                    <option style="color: black" class=" form-control" value="no">No</option>
                   </select>
                 </div>
-              </div>              
+              </div>
               <div class=" col-md-4 pl-md-1">
                 <div class=" form-group">
                   <label> Internet Usage (hour) </label>
-                  <input
-                    class=" form-control"
-                    placeholder="0"
-                    type="number"
-                    name="internet" 
-                    [(ngModel)]="student.internet" 
-                  />
+                  <input class=" form-control" placeholder="0" type="number" name="internet"
+                    [(ngModel)]="student.internet" />
                 </div>
               </div>
             </div>
-            <div class=" row">  
-              <div class=" col-md-6 pr-md-1">
+            <div class=" row">
+              <div class=" col-md-4 pr-md-1">
                 <div class=" form-group">
                   <label> Free Time (hours) </label>
-                  <input
-                    class=" form-control"
-                    placeholder="0"
-                    type="number"
-                    name="freetime" 
-                    [(ngModel)]="student.freetime" 
-                  />
+                  <input class=" form-control" placeholder="0" type="number" name="freetime"
+                    [(ngModel)]="student.freetime" />
                 </div>
               </div>
-              <div class=" col-md-6 px-md-1">
+              <div class=" col-md-4 px-md-1">
+                <div class=" form-group">
+                  <label> Work Time (hours) </label>
+                  <input class=" form-control" placeholder="0" type="number" name="workTime"
+                    [(ngModel)]="student.workTime" />
+                </div>
+              </div>
+              <div class=" col-md-4 pl-md-1">
                 <div class=" form-group">
                   <label> Absence (days) </label>
-                  <input
-                    class=" form-control"
-                    placeholder="0"
-                    type="number"
-                    name="absence"
-                    [(ngModel)]="student.absence"  
-                  />
+                  <input class=" form-control" placeholder="0" type="number" name="absence"
+                    [(ngModel)]="student.absence" />
                 </div>
-              </div> 
+              </div>
             </div>
             <div class=" row">
               <div class=" col-md-6 pr-md-1">
                 <div class=" form-group">
                   <label> Term 1 Marks </label>
-                  <input
-                    class=" form-control"
-                    placeholder="0"
-                    type="number"
-                    name="term1" 
-                    [(ngModel)]="student.term1"  
-                  />
+                  <input class=" form-control" placeholder="0" type="number" name="term1" [(ngModel)]="student.term1" />
                 </div>
               </div>
               <div class=" col-md-6 px-md-1">
                 <div class=" form-group">
                   <label> Term 2 Marks </label>
-                  <input
-                    class=" form-control"
-                    placeholder="0"
-                    type="number"
-                    name="term2" 
-                    [(ngModel)]="student.term2"  
-                  />
+                  <input class=" form-control" placeholder="0" type="number" name="term2" [(ngModel)]="student.term2" />
                 </div>
-              </div> 
-            </div> 
+              </div>
+            </div>
           </form>
         </div>
         <div class=" card-footer">
           <button (click)="submit()" class=" btn btn-fill btn-danger" type="submit">Sumbit</button>
         </div>
       </div>
-    </div> 
+    </div>
   </div>
 </div>

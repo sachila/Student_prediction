@@ -48,7 +48,7 @@ class SqlConnector:
         except Exception as e:
 
             result['status'] = False;
-            result['message'] = "failure - " + e
+            result['message'] = "failure - " + str(e)
 
         return result
 
