@@ -1,9 +1,9 @@
 <div class=" content">
   <div class=" row">
-    <div class=" col-md-8">
+    <div class=" col-md-10">
       <div class=" card">
         <div class=" card-header">
-          <h5 class=" title">Name: {{student.name}}</h5>
+          <h5 class=" title">Name: <h5 style="color: rgba(255, 255, 255, 0.6);display: inline-block;"> &nbsp; {{student.name}} </h5></h5>
         </div>
         <div class=" card-body">
           <form>
@@ -11,30 +11,17 @@
             <div class=" row">
               <div class=" col-md-4 pr-md-1">
                 <div class=" form-group">
-                  <label> Failure Subjects: {{student.failures}} </label>
+                  <label> Failed Subjects: <label style="color: white"> &nbsp;{{student.failures}} </label></label>
                 </div>
               </div>
               <div class=" col-md-4 px-md-1">
                 <div class=" form-group">
-                  <label> Gender: {{student.gender === 'M'? 'Male': 'Female'}} </label>
+                  <label> Gender: <label style="color: white"> &nbsp;{{student.gender === 'M'? 'Male': 'Female'}} </label></label>
                 </div>
               </div>
               <div class=" col-md-4 pl-md-1">
                 <div class=" form-group">
-                  <label> Age: {{student.age}} </label>
-                </div>
-              </div>
-            </div>
-
-            <div class=" row">
-              <div class=" col-md-6 pr-md-1">
-                <div class=" form-group">
-                  <label> Extracurricular Activities: {{student.extraActivities}} </label>
-                </div>
-              </div>
-              <div class=" col-md-6 px-md-1">
-                <div class=" form-group">
-                  <label> Internet: {{student.internet}} </label>
+                  <label> Age: <label style="color: white"> &nbsp;{{student.age}} years</label></label>
                 </div>
               </div>
             </div>
@@ -42,33 +29,53 @@
             <div class=" row">
               <div class=" col-md-4 pr-md-1">
                 <div class=" form-group">
-                  <label> Absence: {{student.absence}} </label>
+                  <label> Free Time:<label style="color: white"> &nbsp; {{student.freetime}} hr </label></label>
                 </div>
               </div>
               <div class=" col-md-4 px-md-1">
                 <div class=" form-group">
-                  <label> Term 1: {{student.term1}} </label>
+                  <label> Work Time: <label style="color: white"> &nbsp;{{student.workTime}} hr</label></label>
                 </div>
               </div>
               <div class=" col-md-4 pl-md-1">
                 <div class=" form-group">
-                  <label> Term 2: {{student.term2}} </label>
+                  <label> Internet: <label style="color: white"> &nbsp;{{student.internet}} hr</label></label>
                 </div>
               </div>
+            </div>
+
+
+            <div class=" row" style="height: 20px;">
+              <div class=" col-md-12 pr-md-1"> 
+              </div> 
             </div>
 
             <div class=" row">
               <div class=" col-md-6 pr-md-1">
                 <div class=" form-group">
-                  <label> Free Time: {{student.freetime}} </label>
-                </div>
-              </div>
-              <div class=" col-md-6 px-md-1">
-                <div class=" form-group">
-                  <label> Work Time: {{student.workTime}} </label>
+                  <label> Participate in Extracurricular Activities: <label style="color: white"> &nbsp;{{student.extraActivities}} </label></label>
                 </div>
               </div>
             </div>
+
+            <div class=" row">
+              <div class=" col-md-4 pr-md-1">
+                <div class=" form-group">
+                  <label> Absence: <label style="color: white"> &nbsp;{{student.absence}} days </label></label>
+                </div>
+              </div>
+              <div class=" col-md-4 px-md-1">
+                <div class=" form-group">
+                  <label> Term 1 Marks: <label style="color: white"> &nbsp;{{student.term1}} </label></label>
+                </div>
+              </div>
+              <div class=" col-md-4 pl-md-1">
+                <div class=" form-group">
+                  <label> Term 2 Marks: <label style="color: white"> &nbsp;{{student.term2}} </label></label>
+                </div>
+              </div>
+            </div>
+
           </form>
         </div>
       </div>

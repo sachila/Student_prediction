@@ -20,14 +20,16 @@ export class StudentListComponent implements OnInit {
         console.log(this.students);
       }
     });
-  }
-
-  navigateToDashboard(student: Student) {
-    this.router.navigate(["/dashboard"]);
-  }
+  } 
 
   navigateToDetails(student: Student) {
     this.router.navigate(["/studentDetails"], {
+      queryParams: { studentId: student.id }
+    });
+  }
+
+  navigateToDashboard(student: Student) {
+    this.router.navigate(["./dashboard"], {
       queryParams: { studentId: student.id }
     });
   }

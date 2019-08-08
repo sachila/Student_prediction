@@ -21,6 +21,9 @@ export class UserComponent implements OnInit {
       (data: Response) => {
         if (data && data.status) {
           this.router.navigate(["/dashboard"]);
+            this.router.navigate(["./dashboard"], {
+      			queryParams: { studentId: data.message.studentId }
+    		});
         }
       }
     );

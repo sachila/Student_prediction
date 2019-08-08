@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import Chart from "chart.js";
 import { RemoteService } from "../../services/remote.service";
 import { Student } from "../../models/student";
@@ -20,7 +21,10 @@ export class DashboardComponent implements OnInit {
   selectedStudentId: string;
   selectedStudent: Student = new Student();
 
-  constructor(private RemoteService: RemoteService) {}
+  constructor(
+    private RemoteService: RemoteService, 
+    private route: ActivatedRoute,
+  ) {}
 
   studentChange() {
     if (!this.selectedStudentId || this.selectedStudentId === "0") return null;
@@ -50,8 +54,13 @@ export class DashboardComponent implements OnInit {
     this.RemoteService.get("students").subscribe((data: Response) => {
       if (data.status) {
         this.students = data.message;
+        this.studentChange()
       }
     });
+
+    if (this.route.queryParams["value"] &&this.route.queryParams["value"]["studentId"]) {
+         this.selectedStudentId = this.route.queryParams["value"]["studentId"]
+    }
 
     this.updateBarChart();
     this.updatePieChart();
@@ -402,6 +411,13 @@ export class DashboardComponent implements OnInit {
     gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
     gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
 
+
+    var gradientStroke2 = this.ctx.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke2.addColorStop(1, this.getAssessmentChartBargradient());
+    gradientStroke2.addColorStop(0.4, this.getAssessmentChartBarColor());
+    gradientStroke2.addColorStop(0, this.getAssessmentChartBarColor()); //blue colors
+
     var myChart = new Chart(this.ctx, {
       type: "bar",
       responsive: true,
@@ -414,9 +430,21 @@ export class DashboardComponent implements OnInit {
           {
             label: "Marks",
             fill: true,
-            backgroundColor: gradientStroke,
-            hoverBackgroundColor: gradientStroke,
-            borderColor: "#1f8ef1",
+            backgroundColor: [
+                gradientStroke,
+                gradientStroke,
+                gradientStroke2,
+            ],
+            hoverBackgroundColor:  [
+                gradientStroke,
+                gradientStroke,
+                gradientStroke2,
+            ],
+            borderColor:[
+              "#1f8ef1",
+              "#1f8ef1",
+              this.getAssessmentChartBorderColor(),
+            ],
             borderWidth: 2,
             borderDash: [],
             borderDashOffset: 0.0,
@@ -431,4 +459,44 @@ export class DashboardComponent implements OnInit {
       options: gradientBarChartConfiguration
     });
   }
+
+  getAssessmentChartBargradient(){
+
+      let mean: number = (parseInt(this.selectedStudent.term1) + parseInt(this.selectedStudent.term2)) / 2
+
+      if(mean < parseInt(this.selectedStudent.final)){
+        return "rgba(66,134,121,0.2)"; //green 
+      }else if(mean > parseInt(this.selectedStudent.final)){
+        return "rgba(233,32,16,0.2)"; //red 
+      }
+
+      return "rgba(29,140,248,0.2)"; // blue 
+  }
+
+  getAssessmentChartBarColor(){
+
+      let mean: number = (parseInt(this.selectedStudent.term1) + parseInt(this.selectedStudent.term2)) / 2
+
+      if(mean < parseInt(this.selectedStudent.final)){
+        return "rgba(66,134,121,0)"; //green 
+      }else if(mean > parseInt(this.selectedStudent.final)){
+        return "rgba(233,32,16,0)"; //red 
+      }
+
+      return "rgba(29,140,248,0)"; // blue 
+  }
+
+  getAssessmentChartBorderColor(){
+    let mean: number = (parseInt(this.selectedStudent.term1) + parseInt(this.selectedStudent.term2)) / 2
+
+    if(mean < parseInt(this.selectedStudent.final)){
+      return "#00d6b4"; //green boarder
+    }else if(mean > parseInt(this.selectedStudent.final)){
+      return "#ec250d"; //red boarder
+    }
+
+    return "#1f8ef1"; // blue boarder
+  }
 }
+
+

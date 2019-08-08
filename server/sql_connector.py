@@ -44,7 +44,7 @@ class SqlConnector:
             cursor.execute(query)
             self.conn.commit()
             result['status'] = True;
-            result['message'] = "success"
+            result['message'] = {"studentId": cursor.lastrowid}
         except Exception as e:
 
             result['status'] = False;

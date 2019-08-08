@@ -1,6 +1,6 @@
 <div class=" content">
   <div class=" row" *ngFor="let student of students">
-    <div class=" col-md-8">
+    <div class=" col-md-11">
       <div class=" card">
         <div class=" card-header">
           <h5 class=" title">Name: {{student.name}}</h5>
@@ -23,16 +23,16 @@
                   <label> Age: {{student.age}} </label>
                 </div>
               </div>
-              <div class=" col-md-3 pl-md-1">
+              <div class=" col-md-2 pl-md-1">
 
               </div>
 
-              <div class=" col-md-1 pl-md-1" [routerLink]="['./dashboard']">
+              <div class=" col-md-2 pl-md-1" (click)="navigateToDashboard(student)">
                 <div class=" form-group">
-                  <i class="tim-icons icon-chart-pie-36"> Charts</i>
+                  <i class="tim-icons icon-chart-pie-36"> Dashboard</i>
                 </div>
               </div>
-              <div class=" col-md-1 pl-md-1" (click)="navigateToDetails(student)">
+              <div class=" col-md-2 pl-md-1" (click)="navigateToDetails(student)">
                 <div class=" form-group">
                   <i class="tim-icons icon-single-02"> Details</i>
                 </div>
