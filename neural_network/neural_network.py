@@ -1,6 +1,8 @@
 # main libraries
 import numpy as np
 import tensorflow as tf
+from sklearn.utils import class_weight
+
 import keras
 from sklearn.metrics import mean_squared_error, accuracy_score
 from keras.callbacks import TensorBoard
@@ -37,7 +39,7 @@ class NeuralNetwork:
         self.test_data_features = self.df.head(self.number_example_in_test)[self.training_features]
         self.test_data_labels = self.df.head(self.number_example_in_test)[self.label_feature]
 
-        self.EPOCHS = 350
+        self.EPOCHS = 400
 
         # tensorboard set up
         self.tensorboard = TensorBoard(log_dir='logs'.format(time()))
@@ -57,6 +59,9 @@ class NeuralNetwork:
 
         self.model.compile(loss='mse',  optimizer='rmsprop', metrics=['accuracy'])
 
+        # print("Weights")
+        # print(self.model.layers[0].get_weights())
+
     def fit_model(self):
         # Save the model after every epoch.
         file_path = "best_weights/best_weights.{epoch:02d}-{acc:.2f}.h5"
@@ -65,10 +70,17 @@ class NeuralNetwork:
         # Stop training when a monitored quantity has stopped improving.
         early_stop = EarlyStopping(monitor='acc', patience=30, verbose=1, mode='auto')
 
+        print( set(np.unique(4)) )
+        print( set(self.training_data_labels) )
+        class_weights = class_weight.compute_class_weight('balanced',
+                                                          self.training_data_labels,
+                                                          self.training_data_labels)
+        print(class_weights)
+        print(len(class_weights))
         callback_list = [self.tensorboard, checkpoint, early_stop]
         history = self.model.fit(self.training_data_features, self.training_data_labels, epochs=self.EPOCHS,
-                                 callbacks=callback_list, validation_split=0.02, shuffle=True)
-
+                                 callbacks=callback_list, validation_split=0.02, shuffle=True ,
+                                 class_weight="class_weights")
         loss, metrics = self.model.evaluate(self.test_data_features, self.test_data_labels)
         print("Mean Square Error = " + str(loss) + "\n")
         print("Accuracy = " + str(metrics) + "\n")

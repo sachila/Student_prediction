@@ -75,13 +75,13 @@ class PreProcess:
         # IQR
         self.outlier_handler_obj.find_quantile()
 
-        # set up the binning for term tests and final marks
-        self.data_binning_obj.group_values_by_bins(ColumnList.term1ColumnName,
-                                                   "binned_" + str(ColumnList.term1ColumnName))
-        self.data_binning_obj.group_values_by_bins(ColumnList.term2ColumnName,
-                                                   "binned_" + str(ColumnList.term2ColumnName))
-        self.data_binning_obj.group_values_by_bins(ColumnList.finalColumnName,
-                                                   "binned_" + str(ColumnList.finalColumnName))
+        # # set up the binning for term tests and final marks
+        # self.data_binning_obj.group_values_by_bins(ColumnList.term1ColumnName,
+        #                                            "binned_" + str(ColumnList.term1ColumnName))
+        # self.data_binning_obj.group_values_by_bins(ColumnList.term2ColumnName,
+        #                                            "binned_" + str(ColumnList.term2ColumnName))
+        # self.data_binning_obj.group_values_by_bins(ColumnList.finalColumnName,
+        #                                            "binned_" + str(ColumnList.finalColumnName))
 
         print("new row after data processing = " + str(self.df.shape))
         print("\n")

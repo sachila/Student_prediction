@@ -26,7 +26,9 @@ class SavedModel:
 
         trained_model = load_model('train_models/model_simple.h5')
         pred_test = trained_model.predict(data)
-
+        y_classes = pred_test.argmax(axis=-1)
+        print("=========Classes========")
+        print(pred_test)
         return pred_test
 
     def two_way_text_to_number(self,data, current_col_name, main_option):
