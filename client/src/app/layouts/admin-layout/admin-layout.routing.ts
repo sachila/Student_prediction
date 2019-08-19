@@ -1,6 +1,7 @@
 import { Routes } from "@angular/router";
 
 import { DashboardComponent } from "../../pages/dashboard/dashboard.component";
+import { AdminDashboardComponent } from "../../pages/admin-dashboard/admin-dashboard.component";
 import { IconsComponent } from "../../pages/icons/icons.component";
 import { MapComponent } from "../../pages/map/map.component";
 import { NotificationsComponent } from "../../pages/notifications/notifications.component";
@@ -13,6 +14,7 @@ import { StudentDetailsComponent } from "src/app/pages/student-details/student-d
 
 export const AdminLayoutRoutes: Routes = [
   { path: "dashboard", component: DashboardComponent },
+  { path: "adminDashboard", component: AdminDashboardComponent },
   { path: "user", component: UserComponent },
   { path: "studentList", component: StudentListComponent },
   { path: "studentDetails", component: StudentDetailsComponent }

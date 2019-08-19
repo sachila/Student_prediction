@@ -17,6 +17,7 @@ import { TypographyComponent } from "../../pages/typography/typography.component
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { StudentListComponent } from "../../pages/student-list/student-list.component";
 import { StudentDetailsComponent } from "../../pages/student-details/student-details.component";
+import { AdminDashboardComponent } from "../../pages/admin-dashboard/admin-dashboard.component";
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { StudentDetailsComponent } from "../../pages/student-details/student-det
     IconsComponent,
     TypographyComponent,
     NotificationsComponent,
-    MapComponent
+    MapComponent,
+    AdminDashboardComponent
     // RtlComponent
   ]
 })

@@ -15,6 +15,7 @@ sql = SqlConnector()
 
 @app.route('/', methods=['GET'])
 def testapi():
+    sql = SqlConnector()
     result = sql.get_query('SELECT * FROM students')
     return json.dumps(result)
 
@@ -24,6 +25,77 @@ def get_all_students():
     result = sql.get_query('SELECT * FROM students')
     return json.dumps(result)
 
+
+@app.route('/getAgeFreetimeSummary', methods=['GET'])
+def get_age_freetime_summary():
+    result = sql.get_query("SELECT SUM(freetime) as freetime, age FROM students GROUP BY age")
+    return json.dumps(result)
+
+
+@app.route('/getAgeWorktimeSummary', methods=['GET'])
+def get_age_work_summary():
+    result = sql.get_query("SELECT SUM(workTime) as workTime, age FROM students GROUP BY age")
+    return json.dumps(result)
+
+
+@app.route('/getAgeInternetSummary', methods=['GET'])
+def get_age_internet_summary():
+    result = sql.get_query("SELECT SUM(internet) as internet, age FROM students GROUP BY age")
+    return json.dumps(result)
+
+
+@app.route('/getExtraActivitySummary', methods=['GET'])
+def get_extra_activity_summary():
+    f_count = sql.get_query("SELECT COUNT(*) as extraYes FROM students WHERE extraActivities= 'yes'")
+    m_count = sql.get_query("SELECT COUNT(*) as extraNo FROM students WHERE extraActivities= 'no'")
+    print(f_count)
+    result = {}
+
+    result['status'] = True
+    result['message'] = {}
+    result['message']['extraYes'] = f_count['message'][0]['extraYes']
+    result['message']['extraNo'] = m_count['message'][0]['extraNo']
+
+    return json.dumps(result)
+
+@app.route('/getGenderSummary', methods=['GET'])
+def get_gender_summary():
+    f_count = sql.get_query("SELECT COUNT(*) as fCount FROM students WHERE gender= 'F'")
+    m_count = sql.get_query("SELECT COUNT(*) as mCount FROM students WHERE gender= 'M'")
+    print(f_count)
+    result = {}
+
+    result['status'] = True
+    result['message'] = {}
+    result['message']['femaleCount'] = f_count['message'][0]['fCount']
+    result['message']['maleCount'] = m_count['message'][0]['mCount']
+
+    return json.dumps(result)
+
+
+@app.route('/getTermsAverage', methods=['GET'])
+def get_terms_average():
+
+    t1_avg = sql.get_query("SELECT AVG(term1) as t1Avg FROM students")
+    t2_avg = sql.get_query("SELECT AVG(term2) as t2Avg FROM students ")
+
+    print(t1_avg)
+    result = {}
+
+    result['status'] = True
+    result['message'] = {}
+    result['message']['t1Avg'] = t1_avg['message'][0]['t1Avg']
+    result['message']['t2Avg'] = t2_avg['message'][0]['t2Avg']
+
+    return json.dumps(result)
+
+
+
+@app.route('/getAgeSummary', methods=['GET'])
+def get_age_summary():
+
+    rows = sql.get_query("SELECT COUNT(age) as ageCount, age FROM students GROUP BY age")
+    return json.dumps(rows)
 
 @app.route('/predict', methods=['POST'])
 def predict_marks():
