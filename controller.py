@@ -20,9 +20,41 @@ def testapi():
     return json.dumps(result)
 
 
+# @app.route('/deleteAllStudents', methods=['GET'])
+def delete_all():
+    sql = SqlConnector()
+    result = sql.set_query('DELETE FROM students')
+    return json.dumps(result)
+
+
+@app.route('/studentsByLimit', methods=['POST'])
+def get_students_by_limit():
+    print(request.json)
+    result = sql.get_query('SELECT * FROM students limit 100')
+    return json.dumps(result)
+
+
 @app.route('/students', methods=['GET'])
 def get_all_students():
     result = sql.get_query('SELECT * FROM students')
+    return json.dumps(result)
+
+
+@app.route('/getAverageFreetimeSummary', methods=['GET'])
+def get_average_freetime_summary():
+    result = sql.get_query("SELECT SUM(freetime) as sum, AVG(freetime) as avg FROM students")
+    return json.dumps(result)
+
+
+@app.route('/getAverageWorktimeSummary', methods=['GET'])
+def get_average_worktime_summary():
+    result = sql.get_query("SELECT SUM(workTime) as sum, AVG(workTime) as avg FROM students")
+    return json.dumps(result)
+
+
+@app.route('/getAverageInternetSummary', methods=['GET'])
+def get_average_internet_summary():
+    result = sql.get_query("SELECT SUM(internet) as sum, AVG(internet) as avg FROM students")
     return json.dumps(result)
 
 
@@ -90,12 +122,12 @@ def get_terms_average():
     return json.dumps(result)
 
 
-
 @app.route('/getAgeSummary', methods=['GET'])
 def get_age_summary():
 
     rows = sql.get_query("SELECT COUNT(age) as ageCount, age FROM students GROUP BY age")
     return json.dumps(rows)
+
 
 @app.route('/predict', methods=['POST'])
 def predict_marks():

@@ -1,0 +1,152 @@
+<div class=" content"> 
+  <div class=" row"> 
+    <div class=" col-lg-4">
+      <div class=" card card-chart">
+        <div class=" card-header">
+          <h5 class=" card-category">Age to Internet Summary</h5>
+          <h3 class=" card-title">
+            <i class=" tim-icons icon-time-alarm" style="color: #26c6da" > </i>
+          </h3>
+        </div>
+        <div class=" card-body">
+          <div class=" chart-area"><canvas id="ageInternetSummary"> </canvas></div>
+        </div>
+      </div>
+    </div>
+    <div class=" col-lg-4"> 
+      <div class=" card card-chart">
+        <div class=" card-header">
+          <h5 class=" card-category">Age to Work Time Summary</h5>
+          <h3 class=" card-title">
+            <i class=" tim-icons icon-time-alarm text-primary" > </i>
+          </h3>
+        </div>
+        <div class=" card-body">
+          <div class=" chart-area"><canvas id="ageWorktimeLineChart"> </canvas></div>
+        </div>
+      </div>
+    </div>
+    <div class=" col-lg-4">
+      <div class=" card card-chart">
+        <div class=" card-header">
+          <h5 class=" card-category">Age to Freetime Summary</h5>
+          <h3 class=" card-title">
+            <i class=" tim-icons icon-time-alarm text-info"> </i>
+          </h3>
+        </div>
+        <div class=" card-body">
+          <div class=" chart-area"><canvas id="ageFreetimeLineChart"> </canvas></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class=" row">  
+    <div class=" col-lg-4">
+      <div class=" card card-chart">
+        <div class=" card-header">
+          <h5 class=" card-category">Summary of Internal Assesment</h5>
+          <h3 class=" card-title">
+            <i class=" tim-icons icon-delivery-fast text-info"> </i>
+          </h3>
+        </div>
+        <div class=" card-body">
+          <div class=" chart-area"><canvas id="InternalAssesmentSummaryChart"> </canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <div class=" col-lg-4">      
+      <div class=" card card-chart">
+        <div class=" card-header">
+          <h5 class=" card-category">Extra Curricular Activity Progress</h5>
+          <h3 class=" card-title">
+            <i class=" tim-icons icon-send"  style="color: #7e57c2"> </i>
+          </h3>
+        </div>
+        <div class=" card-body">
+          <div class=" chart-area"><canvas id="extraActivityChart"> </canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <div class=" col-lg-4">      
+      <div class=" card card-chart">
+        <div class=" card-header">
+          <h5 class=" card-category">Age Summary</h5>
+          <h3 class=" card-title">
+            <i class=" tim-icons icon-send text-success"> </i>
+          </h3>
+        </div>
+        <div class=" card-body">
+          <div class=" chart-area"><canvas id="ageSummaryChart"> </canvas></div>
+        </div>
+      </div>
+    </div>  
+  </div>
+
+  <div class=" row">
+    <div class=" col-lg-4"> 
+      <div class=" card card-chart">
+        <div class=" card-header">
+          <h5 class=" card-category">Gender Summary</h5>
+          <h3 class=" card-title">
+            <i class=" tim-icons icon-bell-55 text-danger-states"> </i>
+          </h3>
+        </div>
+        <div class=" card-body">
+          <div class=" chart-area"><canvas id="genderSummaryChart"> </canvas></div>
+        </div>
+      </div> 
+    </div>
+
+    <div class=" col-lg-8">      
+      <div class=" card card-chart">
+        <div class=" card-header">
+          <h5 class=" card-category">Time Variation</h5>
+          <h3 class=" card-title">
+            <i class=" tim-icons icon-send" style="color: #b0ff57"> </i>
+          </h3>
+        </div>
+        <div class=" card-body">
+          <div class=" chart-area"><canvas id="timeScatterChart"> </canvas></div>
+        </div>
+      </div>
+    </div> 
+  </div> 
+  <div class=" row"> 
+    <div class=" col-lg-12 col-md-12">
+      <div class=" card">
+        <div class=" card-header">
+          <h4 class=" card-title">Student Data Structure</h4>
+        </div>
+        <div class=" card-body">
+          <div class=" table-responsive">
+            <table class=" table tablesorter" id="">
+              <thead class=" text-primary">
+                <tr>
+                  <th>Name</th>
+                  <th class=" text-center">Age</th>
+                  <th class=" text-center">Gender</th>
+                  <th class=" text-center">Extra Curricular Activities</th>
+                  <th class=" text-center">First Term Marks</th>
+                  <th class=" text-center">Second Term Marks</th> 
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let student of students">
+                  <td>{{student.name}}</td>
+                  <td class=" text-center">{{student.age}}</td>
+                  <td class=" text-center">{{student.gender}}</td> 
+                  <td class=" text-center">{{student.extraActivities}}</td> 
+                  <td class=" text-center">{{student.term1}}</td> 
+                  <td class=" text-center">{{student.term2}}</td>  
+                </tr> 
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+</div>
